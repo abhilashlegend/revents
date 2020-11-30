@@ -2,10 +2,16 @@ import cuid from 'cuid';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createEvent, updateEvent } from '../../../store/actions/event';
 
 const EventForm = (props) => {
 
-    const initialValues = props.selectedEvent ?? {
+    const selectedEvent = useSelector(state => state.event.events.find(evt => evt.id === props.match.params.id));
+
+    const dispatch = useDispatch();
+
+    const initialValues = selectedEvent ?? {
         title: '',
         category: '',
         description: '',
@@ -22,19 +28,20 @@ const EventForm = (props) => {
     }
 
     const onFormSubmitHandler = () => {
-        props.selectedEvent ? props.updateEvent(eventForm) :
-        props.addEvent({
+        selectedEvent ? dispatch(updateEvent(eventForm)) :
+        dispatch(createEvent({
             ...eventForm, 
             id: cuid(), 
             hostedBy: 'Abhilash', 
             hostPhotoURL: '../../../assets/images/user.png', 
             attendees: []
-        })
+        }));
+        props.history.push("/events");
     }
 
     return (
         <Segment clearing>
-            <Header content={ props.selectedEvent ? 'Edit event' : 'Create new event'} />
+            <Header content={ selectedEvent ? 'Edit event' : 'Create new event'} />
             <Form onSubmit={onFormSubmitHandler}>
                 <Form.Field>
                     <input 

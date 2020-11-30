@@ -26,6 +26,9 @@ const Navbar = (props) => {
                 <Menu.Item as={NavLink} to="/events">
                     Events
                 </Menu.Item>
+                <Menu.Item as={NavLink} to="/sandbox">
+                    Sandbox
+                </Menu.Item>
                 { authenticated &&
                 <Menu.Item as={NavLink} to="/createEvent">
                 <Button  positive inverted content='Create Event' />

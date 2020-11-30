@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 import { Button, Icon, Item, List, Segment } from 'semantic-ui-react';
 import UserImage from '../../../../assets/images/user.png'
 import EventListAttendee from '../eventListAttendee/eventListAttendee';
+import { deleteEvent } from '../../../../store/actions/event';
+import { useDispatch } from 'react-redux';
 
 const EventListItem = (props) => {
     const {event} = props;
+
+    const dispatch = useDispatch();
     return (
         <Segment.Group>
             <Segment>
@@ -36,7 +40,7 @@ const EventListItem = (props) => {
             </Segment>
             <Segment clearing>
                 <div>{event.description}</div>
-                <Button onClick={() => props.deleteEvent(event.id)} color='red' floated='right' content='Delete' className="ml-1" />
+                <Button onClick={() => dispatch(deleteEvent(event.id))} color='red' floated='right' content='Delete' className="ml-1" />
                 <Button as={Link} to={`/events/${event.id}`} color='teal' floated='right' content='View' />               
             </Segment>
         </Segment.Group>
