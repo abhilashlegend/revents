@@ -3,3 +3,6 @@
 [1106/105853.238:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1106/105853.262:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Acer\AppData\Local\AVAST Software\Browser\User Data\Crashpad\attachments\17663137-3043-4751-9333-ba4b1354803d: The system cannot find the path specified. (0x3)
 [1116/123718.349:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1211/103514.841:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1217/115357.741:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1218/105732.224:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

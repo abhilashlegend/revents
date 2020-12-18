@@ -5,6 +5,7 @@ import UserImage from '../../../../assets/images/user.png'
 import EventListAttendee from '../eventListAttendee/eventListAttendee';
 import { deleteEvent } from '../../../../store/actions/event';
 import { useDispatch } from 'react-redux';
+import { format } from 'date-fns'
 
 const EventListItem = (props) => {
     const {event} = props;
@@ -27,7 +28,7 @@ const EventListItem = (props) => {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock' /> {event.date}
+                    <Icon name='clock' /> {format(event.date, 'MMMM d, yyyy h:mm a')}
                     <Icon name='marker' /> {event.venue}
                 </span>
             </Segment>

@@ -9,13 +9,14 @@ import NavBar from '../components/navigation/navbar/Navbar';
 import sandbox from '../components/sandbox/sandbox';
 import './App.css';
 import EventForm from './event/eventForm/eventForm';
+import ModalManager from '../components/ui/modal/modalManager';
 
 function App() {
 
   const {key} = useLocation();
-
   return (
     <>
+      <ModalManager />
       <Route path="/" component={Home} exact />
       <Route path={'/(.+)'} render={() => (
         <>

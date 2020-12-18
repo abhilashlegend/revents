@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Container, Menu } from 'semantic-ui-react';
 import WhiteLogo from '../../../assets/images/logo-white.png';
 import { NavLink } from 'react-router-dom';
 import SignedInMenu from './signedInMenu/signedInMenu';
 import SignedOutMenu from './signedOutMenu/signedOutMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutUser } from '../../../store/actions/auth';
 
 const Navbar = (props) => {
 
-    const [authenticated, setAuthenticated] = useState(false);
     const history = useHistory();
 
-    const signoutHandler = () => {
-        setAuthenticated(false);    
+    const authenticated = useSelector(state => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
+
+    const signoutHandler = () => {  
+        dispatch(signOutUser());    
         history.push("/");
     }
 
@@ -35,7 +39,7 @@ const Navbar = (props) => {
             </Menu.Item> }
                 
                 { authenticated ? <SignedInMenu setAuth={signoutHandler} /> :  
-                <SignedOutMenu setAuth={setAuthenticated} /> }
+                <SignedOutMenu /> }
             </Container>
         </Menu>
     )
