@@ -1,19 +1,22 @@
-import { createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import testReducer from './reducers/testReducer';
 import eventReducer from './reducers/eventReducer';
 import { combineReducers } from 'redux';
 import modalReducer from './reducers/modalReducer';
 import authReducer from './reducers/authReducer';
+import thunk from 'redux-thunk';
+import asyncReducer from './reducers/asyncReducer';
 
 const rootReducer = combineReducers({
     test: testReducer,
     event: eventReducer,
     modal: modalReducer,
-    auth: authReducer
+    auth: authReducer,
+    async: asyncReducer
 });
 
 export const configureStore = () => {
-    return createStore(rootReducer, devToolsEnhancer());
+    return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 }
 

@@ -1,13 +1,16 @@
 import * as actionTypes from '../actions/actionTypes';
-import { sampleData }  from '../../sampleData';
-
 
 const initialState = {
-    events: sampleData
+    events: []
 }
 
 const eventReducer = (state = initialState, action) => {
     switch(action.type){
+        case actionTypes.FETCH_EVENTS:
+            return {
+                ...state,
+                events: action.payload
+            }
         case actionTypes.CREATE_EVENT:
             return {
                 ...state,

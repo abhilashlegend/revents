@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'react-calendar/dist/Calendar.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,6 +11,7 @@ import ScrollToTop from './components/navigation/scrollToTop';
 
 
 const store = configureStore();
+
 
 ReactDOM.render(
   <Provider store={store}>

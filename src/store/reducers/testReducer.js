@@ -1,17 +1,34 @@
+import { finishAction, startAction, errorAction } from "../actions/async";
+import { delay } from '../../utility/utility';
+import { toast } from "react-toastify";
+
 const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
 export const increment = amount => {
-    return {
-        type: INCREMENT_COUNTER,
-        payload: amount
+    return async dispatch => {
+        dispatch(startAction());
+        try {
+            await delay(2000);
+            dispatch({type: INCREMENT_COUNTER, payload: amount});
+            dispatch(finishAction());
+        } catch(error){
+            dispatch(errorAction(error));
+        }
     }
 }
 
 export const decrement = amount => {
-    return {
-        type: DECREMENT_COUNTER,
-        payload: amount
+    return async dispatch => {
+        dispatch(startAction());
+        try{
+            await delay(2000);
+            dispatch({type: DECREMENT_COUNTER, payload: amount});
+            dispatch(finishAction());
+        } catch(error) {
+            dispatch(errorAction(error));
+            toast.error(error);
+        }
     }
 }
 

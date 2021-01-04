@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Icon, Item, List, Segment } from 'semantic-ui-react';
+import { Button, Icon, Item, Label, List, Segment } from 'semantic-ui-react';
 import UserImage from '../../../../assets/images/user.png'
 import EventListAttendee from '../eventListAttendee/eventListAttendee';
-import { deleteEvent } from '../../../../store/actions/event';
-import { useDispatch } from 'react-redux';
 import { format } from 'date-fns'
+import { deleteEventFromFirestore } from '../../../../firestore/fireStoreService';
 
 const EventListItem = (props) => {
     const {event} = props;
 
-    const dispatch = useDispatch();
     return (
         <Segment.Group>
             <Segment>
@@ -22,6 +20,14 @@ const EventListItem = (props) => {
                             <Item.Description>
                                 Hosted by {event.hostedBy}
                             </Item.Description>
+                            {event.isCancelled && (
+                                <Label
+                                    style={{top: '-40px'}}
+                                    ribbon='right'
+                                    color='red'
+                                    content='This event has been cancelled'
+                                />
+                            )}
                         </Item.Content>
                     </Item>
                 </Item.Group>
@@ -41,7 +47,7 @@ const EventListItem = (props) => {
             </Segment>
             <Segment clearing>
                 <div>{event.description}</div>
-                <Button onClick={() => dispatch(deleteEvent(event.id))} color='red' floated='right' content='Delete' className="ml-1" />
+                <Button onClick={() => deleteEventFromFirestore(event.id)} color='red' floated='right' content='Delete' className="ml-1" />
                 <Button as={Link} to={`/events/${event.id}`} color='teal' floated='right' content='View' />               
             </Segment>
         </Segment.Group>

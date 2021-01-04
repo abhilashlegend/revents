@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, useLocation } from 'react-router';
 import 'semantic-ui-css/semantic.min.css'
+import 'react-toastify/dist/ReactToastify.min.css';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../components/dashboard/Dashboard';
 import EventDetail from '../components/events/eventDetail/eventDetail';
@@ -10,12 +11,15 @@ import sandbox from '../components/sandbox/sandbox';
 import './App.css';
 import EventForm from './event/eventForm/eventForm';
 import ModalManager from '../components/ui/modal/modalManager';
+import { ToastContainer } from 'react-toastify';
+import Error from '../components/error/error';
 
 function App() {
 
   const {key} = useLocation();
   return (
     <>
+      <ToastContainer position="bottom-right" hideProgressBar />
       <ModalManager />
       <Route path="/" component={Home} exact />
       <Route path={'/(.+)'} render={() => (
@@ -26,6 +30,7 @@ function App() {
           <Route path="/events/:id" component={EventDetail} />
           <Route path="/sandbox" component={sandbox} />
           <Route path={['/createEvent','/manage/:id']} key={key} component={EventForm} />
+          <Route path="/error" component={Error} />
         </Container>
         </>
       )} />
