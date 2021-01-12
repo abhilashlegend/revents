@@ -7,6 +7,7 @@ import modalReducer from './reducers/modalReducer';
 import authReducer from './reducers/authReducer';
 import thunk from 'redux-thunk';
 import asyncReducer from './reducers/asyncReducer';
+import { verifyAuth } from './actions/auth';
 
 const rootReducer = combineReducers({
     test: testReducer,
@@ -17,6 +18,8 @@ const rootReducer = combineReducers({
 });
 
 export const configureStore = () => {
-    return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+    const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+    store.dispatch(verifyAuth());
+    return store;
 }
 

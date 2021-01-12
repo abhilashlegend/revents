@@ -13,10 +13,16 @@ import EventForm from './event/eventForm/eventForm';
 import ModalManager from '../components/ui/modal/modalManager';
 import { ToastContainer } from 'react-toastify';
 import Error from '../components/error/error';
+import ChangePassword from '../components/auth/changePassword';
+import { useSelector } from 'react-redux';
+import Loader from '../components/ui/loader/loader';
 
 function App() {
 
   const {key} = useLocation();
+  const {appInit} = useSelector(state => state.async);
+
+  if(!appInit) return <Loader content="Loading app..." />
   return (
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
@@ -30,6 +36,7 @@ function App() {
           <Route path="/events/:id" component={EventDetail} />
           <Route path="/sandbox" component={sandbox} />
           <Route path={['/createEvent','/manage/:id']} key={key} component={EventForm} />
+          <Route path="/change-password" component={ChangePassword} />
           <Route path="/error" component={Error} />
         </Container>
         </>

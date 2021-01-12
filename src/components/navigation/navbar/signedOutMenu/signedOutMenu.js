@@ -8,7 +8,7 @@ const SignedOutMenu = props => {
     return (
         <Menu.Item position="right">
             <Button basic inverted content="Login" onClick={() => dispatch(openModal('loginModal'))} />
-            <Button basic inverted content="Register" className="ml-1" />
+            <Button basic inverted content="Register" onClick={() => dispatch(openModal('registerModal'))} className="ml-1" />
         </Menu.Item>
     )
 }

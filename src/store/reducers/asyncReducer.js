@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     loading: false,
-    error: null
+    error: null,
+    appInit: false
 }
 
 const asyncReducer = (state = initialState, {type, payload}) => {
@@ -26,6 +27,11 @@ const asyncReducer = (state = initialState, {type, payload}) => {
                 ...state,
                 loading: false,
                 error: payload
+            }
+        case actionTypes.ASYNC_APP_LOADED:
+            return {
+                ...state,
+                appInit: true
             }
         default:
             return state;

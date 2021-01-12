@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import TestModal from '../../sandbox/testModal';
 import LoginForm from '../../auth/loginForm';
+import RegisterForm from '../../auth/registerForm';
 
 const ModalManager = (props) => {
    const showModal = useSelector(state => state.modal.show);
@@ -14,6 +15,9 @@ const ModalManager = (props) => {
    else if(modalType === 'loginModal'){
        renderedModal = <LoginForm show={showModal} />
    }
+   else if(modalType === 'registerModal'){
+    renderedModal = <RegisterForm show={showModal} />
+}
     return renderedModal;
 }
 
