@@ -65,3 +65,23 @@ export const setUserProfileData = user => {
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
 }
+
+export const getUserProfile = userId => {
+    return db.collection("users").doc(userId);
+}
+
+export const updateUserProfile = profile => {
+    const user = firebase.auth().currentUser;
+
+    try {
+        if(user.displayName !== profile.displayName) {
+            user.updateProfile({
+                displayName: profile.displayName
+            })
+        }
+        return db.collection('users').doc(user.uid).update(profile);
+    } catch (error) {
+        throw error;
+    }
+   
+}

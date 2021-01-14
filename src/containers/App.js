@@ -16,6 +16,7 @@ import Error from '../components/error/error';
 import ChangePassword from '../components/auth/changePassword';
 import { useSelector } from 'react-redux';
 import Loader from '../components/ui/loader/loader';
+import Profile from '../components/profile/profile';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/events/:id" component={EventDetail} />
           <Route path="/sandbox" component={sandbox} />
           <Route path={['/createEvent','/manage/:id']} key={key} component={EventForm} />
+          <Route path="/profile/:id" component={Profile} />
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/error" component={Error} />
         </Container>

@@ -8,13 +8,15 @@ import authReducer from './reducers/authReducer';
 import thunk from 'redux-thunk';
 import asyncReducer from './reducers/asyncReducer';
 import { verifyAuth } from './actions/auth';
+import profileReducer from './reducers/profileReducer';
 
 const rootReducer = combineReducers({
     test: testReducer,
     event: eventReducer,
     modal: modalReducer,
     auth: authReducer,
-    async: asyncReducer
+    async: asyncReducer,
+    profile:profileReducer
 });
 
 export const configureStore = () => {

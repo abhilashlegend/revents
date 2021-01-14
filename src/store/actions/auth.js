@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import firebase from '../../config/firebase';
+import { dataFromSnapShot, getUserProfile } from '../../firestore/fireStoreService';
+import { currentUserProfile } from './profile';
 
 export const signInUser = user => {
     return {
@@ -13,9 +15,14 @@ export const verifyAuth = () => {
         return firebase.auth().onAuthStateChanged(user => {
             if(user) {
                 dispatch(signInUser(user));
-                dispatch({type: actionTypes.ASYNC_APP_LOADED})
+                const profileRef = getUserProfile(user.uid);
+                profileRef.onSnapshot(snapshot => {
+                    dispatch(currentUserProfile(dataFromSnapShot(snapshot)));
+                    dispatch({type: actionTypes.ASYNC_APP_LOADED});
+                });
             } else {
                 dispatch(signOutUser());
+                dispatch({type: actionTypes.ASYNC_APP_LOADED});
             }
         })
     }
