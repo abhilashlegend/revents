@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import firebase from '../config/firebase';
 import { setUserProfileData } from './fireStoreService';
+import 'firebase/storage';
 
 export const signInWithEmail = creds => {
     return firebase.auth().signInWithEmailAndPassword(creds.email, creds.password);
@@ -43,4 +44,17 @@ export const socialLogin = async selectedProvider => {
 
 export const updatePassword = creds => {
     return firebase.auth().currentUser.updatePassword(creds.password1);
+}
+
+export const uploadToFirebaseStorage = (file, filename) => {
+    const user = firebase.auth().currentUser;
+    const storageRef = firebase.storage().ref();
+    return storageRef.child(`${user.uid}/user_images/${filename}`).put(file);
+}
+
+export const deleteFromFirebaseStorage = filename => {
+    const user = firebase.auth().currentUser;
+    const storageRef = firebase.storage().ref();
+    const photoRef = storageRef.child(`${user.uid}/user_images/${filename}`);
+    return photoRef.delete();
 }

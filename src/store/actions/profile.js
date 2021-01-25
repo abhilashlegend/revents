@@ -13,3 +13,10 @@ export const selectedUserProfile = profile => {
         payload: profile
     }
 }
+
+export const currentUserPhotos = photos => {
+    return {
+        type: actionTypes.CURRENT_USER_PHOTOS,
+        payload: photos
+    }
+}

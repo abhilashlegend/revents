@@ -8,7 +8,7 @@ const ProfileHeader = props => {
                 <Grid.Column width={12}>
                     <Item.Group>
                         <Item>
-                            <Item.Image avatar size="small" src="/assets/images/user.png" />
+                            <Item.Image avatar size="small" src={props.profile.photoURL || '/assets/images/user.png'} />
                             <Item.Content verticalAlign='middle'>
                                 <Header as="h1" style={{display: 'block', marginBottom: 10}} content={props.profile.displayName.toUpperCase()} />
                             </Item.Content>
